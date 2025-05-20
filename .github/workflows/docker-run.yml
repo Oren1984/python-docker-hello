@@ -1,23 +1,29 @@
-name: Docker Run
+name: Docker Build and Run
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Run Hello World
         run: echo "Hello World"
 
-      - name: Show Docker version
+      - name: Check Docker version
         run: docker -v
-        
+
       - name: Build Docker image
         run: docker build -t python-docker-hello .
 
       - name: Run Docker container
         run: docker run --rm python-docker-hello
+        
+      - name: List files in repo
+        run: ls -la 
+      - name: List repo files
+        run: ls -la
+
